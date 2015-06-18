@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Context path='/pizzaluigi'>
+	<Resource name='jdbc/pizzaluigi' 
+		type='javax.sql.DataSource'
+		driverClassName='com.mysql.jdbc.Driver'
+		url='jdbc:mysql://localhost/pizzaluigi'
+		username='cursist' 
+		password='cursist' 							
+		closeMethod='close' /> 						<!-- als de website stopt sluit tomcat standaard de connections in de datasource dit duurt soms lang,  -->
+</Context> 											<!-- met deze regel voert tomcat op de datasource de method close uit zodra de webiste stopt -->
+
+<!-- (1) Onbelangrijke warning
+(2) Je maakt per DataSource een child element Resource binnen het element Context. 
+	Je geeft elke DataSource een unieke naam met het attribuut name. 
+	Zo’n naam noemt een JNDI (Java Naming and Directory Interface) name.
+	Er is een conventie dat een DataSource naam begint met jdbc
+(3) type bevat de Java interface die een DataSource voorstelt: javax.sql.DataSource.
+(4) driverClassName bevat de JDBC driver class waarmee Tomcat de database opent.
+(5) url bevat de JDBC URL waarmee Tomcat de database opent.
+(6) username bevat de gebruikersnaam waarmee Tomcat de database opent.
+(7) password bevat het bijbehorend paswoord.
+(8) Als de website stopt, sluit Tomcat standaard de Connections in de DataSource pas wanneer de garbage collector het geheugen opruimt. Dit kan een eindje duren. Met deze regel voert Tomcat op de DataSource de method close uit zodra de website stopt. Deze method sluit direct alle connecties in de DataSource. -->
